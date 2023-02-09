@@ -1,0 +1,19 @@
+{
+  "name": "benchmarks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --no-warnings index.js",
+    "start:timeout": "node --no-warnings index.js timeout"
+
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocannon": "7.10.0",
+    "ora": "6.1.2"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "feathers_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.mjs",
+    "dev": "node-dev app.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@feathersjs/express": "5.0.0-pre.36",
+    "@feathersjs/feathers": "5.0.0-pre.36",
+    "node-dev": "^8.0.0"
+  }
+}

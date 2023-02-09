@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "moleculer": "^0.14.28",
+    "moleculer-web": "^0.10.5"
+  },
+  "name": "moleculer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "LOGGER=false node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

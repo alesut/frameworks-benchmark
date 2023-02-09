@@ -1,0 +1,21 @@
+{
+  "name": "feathers_koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.mjs",
+    "dev": "node-dev app.mjs"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@feathersjs/feathers": "^5.0.0-pre.36",
+    "@feathersjs/koa": "^5.0.0-pre.36",
+    "@feathersjs/socketio": "4.5.15",
+    "koa-static": "^5.0.0",
+    "node-dev": "^8.0.0"
+  }
+}
