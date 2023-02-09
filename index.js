@@ -22,9 +22,6 @@ const PACKAGES = [
         name: 'node',
     },
     {
-        name: 'hapi',
-    },
-    {
         name: 'koa',
     },
     {
@@ -38,6 +35,9 @@ const PACKAGES = [
     },
     {
         name: 'moleculer',
+    },
+    {
+        name: 'hapi',
     },
     {
         name: 'feathers_koa',
