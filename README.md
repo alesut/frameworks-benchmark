@@ -1,5 +1,5 @@
+# WIP
 This repo contains a heavily based on https://github.com/fastify/benchmarks comparison of different frameworks.
-WIP
 
 If you want to try it in its current state, do the next.
 `npm i` in the root
