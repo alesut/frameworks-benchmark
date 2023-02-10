@@ -3,11 +3,16 @@
 import autocannon from 'autocannon'
 import fs from 'fs'
 
-const DURATION = 30;
+const DURATION = 20;
 const KILOBYTE = 1024;
 const MEGABYTE = 1024 * KILOBYTE;
 const METRICS_URL = 'http://127.0.0.1:3000/metrics';
 const BENCH_URL = 'http://127.0.0.1:3000/';
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 const run = (opts = {}, handler, save) => new Promise(async (resolve, reject) => {
     const MEMORY = {
@@ -21,7 +26,7 @@ const run = (opts = {}, handler, save) => new Promise(async (resolve, reject) =>
         url: opts.url || BENCH_URL,
         connections: 100,
         pipelining: 10,
-        duration: DURATION
+        duration: opts.duration || DURATION
     }).on('tick', async () => {
         try {
             const memoryConsumption = parseInt((await (await fetch(METRICS_URL)).json()).memory);
@@ -33,6 +38,7 @@ const run = (opts = {}, handler, save) => new Promise(async (resolve, reject) =>
             console.log(error);
         }
     }).on('done', async (result) => {
+        await timeout(3000);
         MEMORY.after = parseInt((await (await fetch(METRICS_URL)).json()).memory);
 
         if (save) {

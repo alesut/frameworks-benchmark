@@ -82,13 +82,14 @@ const doBench = async (handler) => {
 
     try {
         console.log(`Warming ${handler.name}`);
-        await fire(opts, handler, false);
+        await fire({ ...opts, duration: 5 }, handler, false);
     } catch (error) {
         return console.log(error)
     }
 
     try {
         console.log(`Working ${handler.name}`);
+        await timeout(3000);
         await fire(opts, handler, true);
         console.log('Finished');
         assert.ok(forked.kill('SIGINT'))
@@ -99,8 +100,17 @@ const doBench = async (handler) => {
 }
 
 async function saveCSV(name, results) {
+    const humanReadable = true;
     const header = ['Framework', 'Requests/sec', 'Latency (ms)', 'Memory before (MB)', 'Memory peak (MB)', 'Memory after (MB)'].join(',') + '\n';
-    const csv = results.map((result, index) => {
+    const csv = results.map((result) => {
+        if (humanReadable) {
+            const requests = (result.requests.average / 1000).toFixed(1);
+            const memoryBefore = Math.trunc(result.memory.before);
+            const memoryPeak = Math.trunc(result.memory.peak);
+            const memoryAfter = Math.trunc(result.memory.after);
+            return `${result.name},${requests}K,${result.latency.average},${memoryBefore},${memoryPeak},${memoryAfter}`
+        }
+
         return `${result.name},${result.requests.average},${result.latency.average},${result.memory.before},${result.memory.peak},${result.memory.after}`
     }).join('\n');
 
@@ -120,10 +130,10 @@ async function compare(timeout = '') {
         return {
             name: result.name,
             'Requests/sec': result.requests.average,
-            'Latency': `${result.latency.average}ms`,
-            'Memory before': `${result.memory.before}MB`,
-            'Memory peak': `${result.memory.peak}MB`,
-            'Memory after': `${result.memory.after}MB`,
+            'Latency': `${result.latency.average} ms`,
+            'Memory before': `${result.memory.before} MB`,
+            'Memory peak': `${result.memory.peak} MB`,
+            'Memory after': `${result.memory.after} MB`,
         }
     });
     console.table(resultsForPrinting);
@@ -149,7 +159,9 @@ const start = async (list) => {
         return console.log(error)
     }
 }
+
 (async () => {
-    await start(PACKAGES)
+    await start(PACKAGES);
+    process.exit();
 })();
 
